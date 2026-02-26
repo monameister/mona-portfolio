@@ -1,47 +1,56 @@
 import Image from "next/image";
 
-const projects = [
+type Project = {
+  title: string;
+  problem: string;
+  solution: string;
+  result: string;
+  stack: string;
+  live?: string;
+  repo?: string;
+};
+
+const projects: Project[] = [
   {
     title: "SheillaBot Ops",
-    problem: "Managing operations across multiple channels was manual and fragmented.",
-    solution: "Built an AI co-pilot workflow with Discord/Telegram/WhatsApp + Notion/GitHub automations.",
-    result: "Faster execution, fewer missed tasks, and cleaner daily operations.",
+    problem: "Daily operations across channels were manual and fragmented.",
+    solution:
+      "Built an AI co-pilot system connecting Discord, Telegram, WhatsApp, Notion, and GitHub.",
+    result: "Faster delivery, fewer dropped tasks, and cleaner execution every day.",
     stack: "OpenClaw, Python, Notion API, GitHub",
-    live: "#",
     repo: "https://github.com/monameister/SheillaBot",
   },
   {
-    title: "Cleaning Schedule Automation",
-    problem: "Weekly planning updates were error-prone and repetitive.",
-    solution: "Created structured sync flows with safe row-preserving updates and reminders.",
-    result: "Reduced manual edits and improved schedule consistency.",
-    stack: "Google Sheets API, Python, Automation scripts",
-    live: "#",
-    repo: "#",
+    title: "Mona Portfolio",
+    problem: "Needed a modern portfolio with fast iteration and simple deployment.",
+    solution: "Set up a Next.js + GitHub + Vercel continuous deployment workflow.",
+    result: "Live updates in minutes from local edits to production.",
+    stack: "Next.js, Tailwind, Vercel, GitHub",
+    live: "https://mona-portfolio-two.vercel.app",
+    repo: "https://github.com/monameister/mona-portfolio",
   },
   {
-    title: "Personal Health Insights Pipeline",
-    problem: "Health exports were hard to read and compare over time.",
-    solution: "Built scripts to parse and visualize trends for sleep and heart metrics.",
-    result: "Clear weekly signals and easier decision-making.",
-    stack: "Python, data processing, dashboards",
-    live: "#",
-    repo: "#",
+    title: "Cleaning Schedule Automation",
+    problem: "Weekly planning updates were repetitive and error-prone.",
+    solution: "Implemented structured sync and row-safe update logic.",
+    result: "More reliable planning and less admin overhead.",
+    stack: "Google Sheets API, Python, Automation scripts",
+    repo: "https://github.com/monameister/SheillaBot",
   },
 ];
 
 const services = [
   {
     title: "Web Design",
-    text: "User-centered interface design focused on clarity, conversion, and clean visual systems.",
+    text: "Interface design focused on clarity, conversion, and visual consistency.",
   },
   {
     title: "Frontend Development",
-    text: "Responsive websites and product interfaces built with maintainable, scalable code.",
+    text: "Responsive product UI built with scalable, maintainable code.",
   },
   {
     title: "AI & Automation",
-    text: "Practical automations that remove repetitive work and increase delivery speed.",
+    text: "Practical systems that reduce manual work and speed up delivery.",
   },
 ];
 
@@ -62,22 +71,16 @@ export default function Home() {
       <section id="home" className="mx-auto grid max-w-5xl grid-cols-1 items-center gap-12 px-6 py-12 md:grid-cols-2">
         <div>
           <h1 className="max-w-xl text-4xl font-semibold leading-tight md:text-[46px]">
-            Mona is a web designer and front-end developer
+            I design and build practical digital products.
           </h1>
           <p className="mt-8 max-w-xl text-base text-gray-300">
-            I build practical digital products that combine UX clarity, frontend quality, and automation power.
+            I combine UX clarity, frontend quality, and automation systems to help teams ship faster.
           </p>
           <div className="mt-8 flex gap-3">
-            <a
-              href="#contact"
-              className="inline-block border border-[#C778DD] px-5 py-2 font-medium transition hover:bg-[#C778DD]/10"
-            >
+            <a href="#contact" className="inline-block border border-[#C778DD] px-5 py-2 font-medium transition hover:bg-[#C778DD]/10">
               Work with me
             </a>
-            <a
-              href="#projects"
-              className="inline-block border border-[#3A404A] px-5 py-2 font-medium text-gray-200 transition hover:bg-white/5"
-            >
+            <a href="#projects" className="inline-block border border-[#3A404A] px-5 py-2 font-medium text-gray-200 transition hover:bg-white/5">
               View projects
             </a>
           </div>
@@ -91,7 +94,7 @@ export default function Home() {
           </div>
           <div className="mt-2 inline-flex items-center gap-2 border border-gray-500 px-3 py-1 text-sm text-gray-300">
             <span className="h-3 w-3 bg-[#C778DD]" />
-            Currently working on Portfolio
+            Currently building automation-first products
           </div>
         </div>
       </section>
@@ -107,8 +110,16 @@ export default function Home() {
               <p className="mt-2 text-sm text-gray-300"><strong>Result:</strong> {project.result}</p>
               <p className="mt-3 text-xs text-gray-400">{project.stack}</p>
               <div className="mt-3 flex gap-3 text-sm">
-                <a className="text-[#C778DD] hover:underline" href={project.live}>Live</a>
-                <a className="text-[#C778DD] hover:underline" href={project.repo}>GitHub</a>
+                {project.live ? (
+                  <a className="text-[#C778DD] hover:underline" href={project.live} target="_blank" rel="noreferrer">Live</a>
+                ) : (
+                  <span className="text-gray-500">Live soon</span>
+                )}
+                {project.repo ? (
+                  <a className="text-[#C778DD] hover:underline" href={project.repo} target="_blank" rel="noreferrer">GitHub</a>
+                ) : (
+                  <span className="text-gray-500">Private repo</span>
+                )}
               </div>
             </article>
           ))}
@@ -130,8 +141,7 @@ export default function Home() {
       <section id="about" className="mx-auto max-w-5xl px-6 py-10">
         <h2 className="text-2xl font-semibold"><span className="text-[#C778DD]">#</span>about-me</h2>
         <p className="mt-4 max-w-3xl text-gray-300">
-          I combine UX/UI thinking, frontend execution, and AI workflow automation to ship practical solutions fast.
-          My process: Discover → Build → Iterate → Ship.
+          I’m Mona — builder mindset, fast iterations, clean systems. I turn real workflow pain into usable products with strong UX and practical automation.
         </p>
       </section>
 
@@ -147,7 +157,9 @@ export default function Home() {
       <section id="contact" className="mx-auto max-w-5xl px-6 py-12">
         <h2 className="text-2xl font-semibold"><span className="text-[#C778DD]">#</span>contacts</h2>
         <p className="mt-4 text-gray-300">Let’s build something useful and ship it fast.</p>
-        <p className="mt-2 text-gray-300">Email: hello@mona.dev • GitHub: github.com/monameister</p>
+        <p className="mt-2 text-gray-300">
+          GitHub: <a className="text-[#C778DD] hover:underline" href="https://github.com/monameister" target="_blank" rel="noreferrer">github.com/monameister</a>
+        </p>
       </section>
     </main>
   );
